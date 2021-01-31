@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>DOM Manipulation</title>
+
+    <style>
+      .big {font-size:3em; }
+      .blue {color: blue;}
+      .bigBorder {border: black 3px solid;}
+      
+    </style>
+
+  </head>
+  <body>
+
+    <div id="div1" class="bigBorder" ></div>
+    <div id="div2">
+      <img src="">
+    </div>
+    <div id="div3">
+      This div should be programmatically removed.
+    </div>
+
+    <ul>
+      <li class="big blue">IT202</li>
+    </ul>
+
+    <script>
+      // your code here
+
+      //1  Set the contents of div1 to be UIC  
+      const div1 = document.getElementById("div1");
+      div1.textContent="UIC";
+
+
+      //2 Set the color property for div1 to be #D50032
+      div1.style.color='#D50032';
+
+      //3 Add the class big to div1
+      div1.classList.add("big");
+      // Check if class exist should return true
+      console.log(div1.classList.contains("big"));
+      //4 Set the src value of the image element to be 
+      const img1 = document.querySelector("img");
+      img1.src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/University_of_Illinois_at_Chicago_circle_logo.svg/1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png";
+
+      //5 Set the width and height properties of the image element to 25%
+      img1.style.width="50%";
+      //6 Remove div3
+      document.getElementById("div3").remove();
+       // Check if class exist should return false
+      console.log(div1.classList.contains("div3"));
+      //7 Set the contents of the title element to be your GitHub account name.
+      var githubName = document.querySelector("title");
+      githubName.textContent="jgutie45";
+      //8 Create a list item element
+      var listItem = document.createElement("li");
+   
+      //9 Set the content to Computer Science
+      var newContent = document.createTextNode("Computer Science");
+      listItem.appendChild(newContent);
+
+      //10 Add that list item element to the unordered list
+      document.querySelector("ul").appendChild(listItem); 
+
+      //11 Remove the class big from the first list item element
+      document.querySelector("li").classList.remove("big");
+      
+      //12 Add the class blue to the second list item element
+      document.querySelector("li:nth-child(2)").classList.add("blue");
+      //13 Create a clone of the image element
+      let img2 = img1.cloneNode(true);
+      
+      //14 Append the clone to div1
+      div1.appendChild(img2);
+  
+
+    </script>
+
+
+  </body>
+</html>
