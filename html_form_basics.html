@@ -9,14 +9,16 @@
     <h1>Form Basics</h1>
     <form id="form1" name="form1">
         <label for="fname">First name:</label>
-        <input type="text" id="text1" name="text1"> oninput: <span id="result"></span><br><br>
+        <input type="text" id="text1" name="text1"><br><br>
+       
         <input type="radio" name="radio1" value="red">
           <label for="fname">Red</label><br>
         <input type="radio" name="radio1" value="green">
         <label for="fname">Green</label><br>
         <input type="radio" name="radio1" value="blue">
         <label for="fname">Blue</label><br><br>
-        <select class="select1" id="select1" name="select1" >
+
+        <select id="select1" name="select1" >
             <option value="empty"></option>
             <option value="Monday">Mon</option>
             <option value="Wednesday">Wed</option>
@@ -28,10 +30,6 @@
         <br>
         <textarea id="textarea1" name="textarea1" placeholder="Please provide any additional feedback" rows="4" cols="50"></textarea>
         
-        <style>
-   
-        </style>
-  
     </form>
 
 
@@ -49,22 +47,32 @@ It is difficult to get a man to understand something, when his salary depends up
         4) Add a select control with the name and id select1 and 3 options of Mon, Wed, and Fri.  Include an empty option as the first one in the list.
         5) Add a textarea element with the name and id textarea1, with placeholder Please provide any additional feedback
         */
-        /*text1.oninput = function()
-        {
-          result.innerHTML = text1.value;   
-        };
-        */
-        // 4)
-        const selectElement = document.querySelector('#select1');
+        document.querySelector("#text1").value = "Jasmine";
+    
 
-        selectElement.addEventListener('change', (event) => {
-            const result = document.querySelector('.result');
-            result.textContent = 'You choose ${event.target.value}';
-        });
+        
+        // Get selected statement
+      const selectRes = document.querySelectorAll("#select1");
+
+       const radioChoice = document.querySelectorAll('input[name="radio1"]') 
+       var i;
+       for(i = 0; i < radioChoice.length; i++)
+       {
+           if(radioChoice[i].value == "green")
+           {
+               radioChoice[i].checked= true;
+           }
+
+       }
+
+
 
         // 5) 
-        var t = document.querySelector("#uptonSinclairQuote");
-        document.querySelector("textarea1").value = t; 
+        var t = document.querySelector("#uptonSinclairQuote").textContent;
+        document.querySelector("#textarea1").value = t; 
+
+        document.querySelectorAll("option:checked");
+
 
     </script>
   </body>
