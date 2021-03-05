@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+
+
+  </head>
+  <body>
+
+    <canvas id="c1" width="500" height="500"></canvas>
+    <script>
+
+      let c = document.querySelector("#c1");
+      c.style.backgroundColor = "silver";
+      let ctx = c.getContext("2d");
+
+      // create objects per the lab activity
+      let gameObjs = [];
+      gameObjs.push( {x: 250, y: 250, radius: 25, color: "red", colliding: false } )
+      gameObjs.push( {x: 275, y: 275, radius: 25, color: "green", colliding: false} )
+      gameObjs.push( {x: 200, y: 300, radius: 25, color: "blue" , colliding: false} )
+      gameObjs.push( {x: 300, y: 275, radius: 25, color: "purple", colliding: false} )
+      gameObjs.push( {x: 200, y: 400, radius: 25, color: "brown" , colliding: false} )
+      gameObjs.push( {x: 275, y: 299, radius: 25, color: "blue", colliding: false } )
+      gameObjs.push( {x: 275, y: 425, radius: 25, color: "yellow", colliding: false} )
+      gameObjs.push( {x: 300, y: 300, radius: 25, color: "orange" , colliding: false} )
+      gameObjs.push( {x: 400, y: 280, radius: 25, color: "pink", colliding: false} )
+      gameObjs.push( {x: 250, y: 400, radius: 25, color: "blue" , colliding: false} )
+      gameObjs.push( {x: 100, y: 250, radius: 25, color: "red", colliding: false } )
+      gameObjs.push( {x: 150, y: 275, radius: 25, color: "green", colliding: false} )
+      gameObjs.push( {x: 50, y: 300, radius: 25, color: "blue" , colliding: false} )
+      gameObjs.push( {x: 65, y: 275, radius: 25, color: "purple", colliding: false} )
+      gameObjs.push( {x: 450, y: 50, radius: 25, color: "brown" , colliding: false} )
+      gameObjs.push( {x: 400, y: 60, radius: 25, color: "blue", colliding: false } )
+      gameObjs.push( {x: 360, y: 360, radius: 25, color: "yellow", colliding: false} )
+      gameObjs.push( {x: 150, y: 200, radius: 25, color: "orange" , colliding: false} )
+      gameObjs.push( {x: 160, y: 210, radius: 25, color: "pink", colliding: false} )
+      gameObjs.push( {x: 250, y: 467, radius: 25, color: "tan" , colliding: false} )
+
+
+      drawCircle(gameObjs, ctx);
+
+      function drawCircle(gameObjs, ctx)
+      {
+        gameObjs.forEach( (obj) => {
+          ctx.beginPath()
+          ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+          ctx.closePath();
+          ctx.fillStyle = obj.color;
+          ctx.fill();
+          if(obj.colliding)
+          {
+              ctx.lineWidth = 3;
+              ctx.strokeStyle = "white";
+              ctx.stroke();
+          }
+        });
+      }
+
+      // create a function named areColliding that accepts two objects and returns a boolen based on collision
+      // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+
+      // loop the objects to compare every pair
+      //    and if a pair are colliding, redraw them
+      //    with a white border
+      function areColliding(obj1, obj2){  
+          var dx;
+          var dy;
+          var distance; 
+          dx = obj1.x - obj2.x; 
+          dy = obj1.y - obj2.y;
+          distance = Math.sqrt(dx * dx + dy * dy);
+
+          if(distance < obj1.radius + obj2.radius){
+            // indicates it collided
+            return true; 
+          }
+
+            return false; 
+      }    
+
+
+
+      
+      gameObjs.forEach((outerObj) =>{
+        //console.log(outerObj);
+        gameObjs.forEach((innerObj) => {
+
+          if(outerObj !== innerObj && areColliding(outerObj, innerObj)){
+            // redraw
+            console.log(outerObj);
+            console.log(innerObj);
+            outerObj.colliding = true; 
+            innerObj.colliding = true; 
+            drawCircle(gameObjs, ctx);
+          }
+
+        });
+      });
+
+      // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
+
+
+    </script>
+  </body>
+</html>
