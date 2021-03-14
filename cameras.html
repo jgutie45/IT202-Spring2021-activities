@@ -124,6 +124,7 @@ button.addEventListener('click', event => {
   }
   const videoConstraints = {};
   if (newButton.value === '') {
+	console.log(newButton.value);
     videoConstraints.facingMode = 'environment';
   } else {
     videoConstraints.deviceId = { exact: newButton.value };
