@@ -95,6 +95,7 @@
 	const button2 = document.querySelector('#button2');
 	const button3 = document.querySelector('#button3');
 	const camera = document.querySelector('.camera');
+	const newButton;
 
 	function stopMediaTracks(stream) {
 		stream.getTracks().forEach(track => {
@@ -104,10 +105,10 @@
 
 function gotDevices(mediaDevices) {
 	button2.innerHTML='';
- 	 let count = 1;
+ 	 let countnewButton = 1;
   mediaDevices.forEach(mediaDevice => {
     if (mediaDevice.kind === 'videoinput') {
-      const newButton = document.createElement('button');
+      newButton = document.createElement('button');
       newButton.value = mediaDevice.deviceId;
       const label = mediaDevice.label || `Camera ${count++}`;
       const textNode = document.createTextNode(label);
@@ -122,10 +123,10 @@ button.addEventListener('click', event => {
     stopMediaTracks(currentStream);
   }
   const videoConstraints = {};
-  if (button2.value === '') {
+  if (newButton.value === '') {
     videoConstraints.facingMode = 'environment';
   } else {
-    videoConstraints.deviceId = { exact: button2.value };
+    videoConstraints.deviceId = { exact: newButton.value };
   }
   const constraints = {
     video: videoConstraints,
