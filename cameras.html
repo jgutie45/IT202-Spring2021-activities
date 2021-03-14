@@ -35,7 +35,7 @@
 			min-height: 80vh;
 		}
 
-		.controls {
+		.camera {
 			text-align: center;
 			padding: 0.5em 0;
 			background: #333e5a;
@@ -57,6 +57,13 @@
 		footer a {
 			color: #fff;
 		}
+
+		#button2{
+			text-align: center;
+			padding: 0.5em 0;
+		}
+
+
 	</style>
 
 </head>
@@ -68,13 +75,11 @@
 	</header>
 
 	<main>
-		<div class="controls">
-			<button id="button">Get camera</button>
-      <select id="select">
-        <option></option>
-      </select>
-    </div>
-
+		<div class="camera">
+				<button id="button">Get camera</button>
+				<div id="button2"></div>
+				
+		</div>
     <video id="video" autoplay playsinline></video>
   </main>
 
@@ -85,28 +90,29 @@
   </footer>
 
   <script>
-	const video = document.getElementById('video');
-	const button = document.getElementById('button');
-	const select = document.getElementById('select');
+	const video = document.querySelector('#video');
+	const button = document.querySelector('#button');
+	const button2 = document.querySelector('#button2');
+	const button3 = document.querySelector('#button3');
+	const camera = document.querySelector('.camera');
 
 	function stopMediaTracks(stream) {
-  stream.getTracks().forEach(track => {
-    track.stop();
-  });
-}
+		stream.getTracks().forEach(track => {
+			track.stop();
+  		});
+ 	}
 
 function gotDevices(mediaDevices) {
-  select.innerHTML = '';
-  select.appendChild(document.createElement('option'));
-  let count = 1;
+	button2.innerHTML='';
+ 	 let count = 1;
   mediaDevices.forEach(mediaDevice => {
     if (mediaDevice.kind === 'videoinput') {
-      const option = document.createElement('option');
-      option.value = mediaDevice.deviceId;
+      const newButton = document.createElement('button');
+      newButton.value = mediaDevice.deviceId;
       const label = mediaDevice.label || `Camera ${count++}`;
       const textNode = document.createTextNode(label);
-      option.appendChild(textNode);
-      select.appendChild(option);
+	  newButton.appendChild(textNode);
+	  button2.appendChild(newButton);
     }
   });
 }
@@ -116,10 +122,10 @@ button.addEventListener('click', event => {
     stopMediaTracks(currentStream);
   }
   const videoConstraints = {};
-  if (select.value === '') {
+  if (button2.value === '') {
     videoConstraints.facingMode = 'environment';
   } else {
-    videoConstraints.deviceId = { exact: select.value };
+    videoConstraints.deviceId = { exact: button2.value };
   }
   const constraints = {
     video: videoConstraints,
