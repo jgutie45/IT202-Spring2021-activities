@@ -110,6 +110,7 @@ function gotDevices(mediaDevices) {
       const newButton = document.createElement('button');
       newButton.value = mediaDevice.deviceId;
       const label = mediaDevice.label || `Camera ${count++}`;
+	  newButton.setattribute('id', label);
       const textNode = document.createTextNode(label);
 	  newButton.appendChild(textNode);
 	  button2.appendChild(newButton);
